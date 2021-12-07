@@ -67,7 +67,42 @@ us@ubuntu:~$ ip a
 
 2. Какой протокол используется для распознавания соседа по сетевому интерфейсу? Какой пакет и команды есть в Linux для этого?
 
-
+Для этого используется команда `lldpctl` из пакета `lldpd`:
+```
+us@ubuntu:~$ lldpctl |grep Interface
+Interface:    enp0s3, via: LLDP, RID: 1, Time: 0 day, 00:05:10
+Interface:    enp0s3, via: LLDP, RID: 2, Time: 0 day, 00:05:10
+Interface:    enp0s3, via: LLDP, RID: 3, Time: 0 day, 00:05:09
+Interface:    enp0s3, via: LLDP, RID: 4, Time: 0 day, 00:05:09
+Interface:    enp0s3, via: LLDP, RID: 5, Time: 0 day, 00:05:08
+Interface:    enp0s3, via: LLDP, RID: 6, Time: 0 day, 00:05:07
+Interface:    enp0s3, via: LLDP, RID: 7, Time: 0 day, 00:05:06
+Interface:    enp0s3, via: LLDP, RID: 8, Time: 0 day, 00:05:06
+Interface:    enp0s3, via: LLDP, RID: 9, Time: 0 day, 00:05:05
+Interface:    enp0s3, via: LLDP, RID: 10, Time: 0 day, 00:05:05
+Interface:    enp0s3, via: LLDP, RID: 11, Time: 0 day, 00:05:05
+Interface:    enp0s3, via: LLDP, RID: 12, Time: 0 day, 00:05:04
+Interface:    enp0s3, via: LLDP, RID: 13, Time: 0 day, 00:05:04
+Interface:    enp0s3, via: LLDP, RID: 14, Time: 0 day, 00:05:02
+Interface:    enp0s3, via: LLDP, RID: 15, Time: 0 day, 00:04:58
+Interface:    enp0s3, via: LLDP, RID: 16, Time: 0 day, 00:04:56
+Interface:    enp0s3, via: LLDP, RID: 17, Time: 0 day, 00:04:55
+Interface:    enp0s3, via: LLDP, RID: 18, Time: 0 day, 00:04:55
+Interface:    enp0s3, via: LLDP, RID: 19, Time: 0 day, 00:04:55
+Interface:    enp0s3, via: LLDP, RID: 20, Time: 0 day, 00:04:54
+Interface:    enp0s3, via: LLDP, RID: 21, Time: 0 day, 00:04:52
+Interface:    enp0s3, via: LLDP, RID: 22, Time: 0 day, 00:04:52
+Interface:    enp0s3, via: LLDP, RID: 23, Time: 0 day, 00:04:51
+Interface:    enp0s3, via: LLDP, RID: 24, Time: 0 day, 00:04:49
+Interface:    enp0s3, via: LLDP, RID: 25, Time: 0 day, 00:04:49
+Interface:    enp0s3, via: LLDP, RID: 26, Time: 0 day, 00:04:49
+Interface:    enp0s3, via: LLDP, RID: 27, Time: 0 day, 00:04:49
+Interface:    enp0s3, via: LLDP, RID: 28, Time: 0 day, 00:04:49
+Interface:    enp0s3, via: LLDP, RID: 29, Time: 0 day, 00:04:49
+Interface:    enp0s3, via: LLDP, RID: 30, Time: 0 day, 00:04:48
+Interface:    enp0s3, via: LLDP, RID: 31, Time: 0 day, 00:04:48
+Interface:    enp0s3, via: LLDP, RID: 32, Time: 0 day, 00:04:48
+```
 ---
 
 3. Какая технология используется для разделения L2 коммутатора на несколько виртуальных сетей? Какой пакет и команды есть в Linux для этого? Приведите пример конфига.
