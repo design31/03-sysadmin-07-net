@@ -107,6 +107,37 @@ Interface:    enp0s3, via: LLDP, RID: 32, Time: 0 day, 00:04:48
 
 3. Какая технология используется для разделения L2 коммутатора на несколько виртуальных сетей? Какой пакет и команды есть в Linux для этого? Приведите пример конфига.
 
+Это VLAN. Для её использования в Ubuntu есть пакет vlan. Приведу пример временной настройки (до перезагрузки):
+```
+us@ubuntu:~$ sudo modprobe 8021q
+us@ubuntu:~$ sudo apt-get install vlan
+us@ubuntu:~$ sudo vconfig add enp0s3 9
+
+Warning: vconfig is deprecated and might be removed in the future, please migrate to ip(route2) as soon as possible!
+
+us@ubuntu:~$ sudo ip addr add 10.0.0.9/24 dev enp0s3.9
+us@ubuntu:~$ sudo ip link set up enp0s3.9
+us@ubuntu:~$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:81:0f:7d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.5.162/24 brd 192.168.5.255 scope global dynamic noprefixroute enp0s3
+       valid_lft 20026sec preferred_lft 20026sec
+    inet6 fe80::eb66:e6e5:f2c9:fa73/64 scope link noprefixroute
+       valid_lft forever preferred_lft forever
+3: enp0s3.9@enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 08:00:27:81:0f:7d brd ff:ff:ff:ff:ff:ff
+    inet 10.0.0.9/24 scope global enp0s3.9
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe81:f7d/64 scope link
+       valid_lft forever preferred_lft forever
+```
+Здесь я добавил VLAN 9 на интерфейс enp0s3 и назначил ему новый IP адрес 10.0.0.9/24
 
 ---
 
