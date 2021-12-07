@@ -258,6 +258,13 @@ DC.XXX.local           ether   00:0c:29:83:5b:cb   C                     enp0s3
 ```
 Удалить все записи можно командой:
 ```
+root@ubuntu:/home/us# ip neigh flush all
+root@ubuntu:/home/us# arp
+Address                  HWtype  HWaddress           Flags Mask            Iface
+hostname.XXX.local       ether   f0:79:59:71:10:86   C                     enp0s3
+```
+Или так:
+```
 root@ubuntu:/home/us# ip link set arp off dev enp0s3; ip link set arp on dev enp0s3
 root@ubuntu:/home/us# arp
 Address                  HWtype  HWaddress           Flags Mask            Iface
