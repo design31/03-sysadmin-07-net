@@ -2,33 +2,8 @@
 
 1. Проверьте список доступных сетевых интерфейсов на вашем компьютере. Какие команды есть для этого в Linux и в Windows?
 
-В Windows для этого есть команда ipconfig /all
+В Windows для этого есть команда `ipconfig /all`:
 ```
-C:\Users\y.kozlov>ipconfig
-
-Настройка протокола IP для Windows
-
-
-Адаптер Ethernet Ethernet 4:
-
-   DNS-суффикс подключения . . . . . :
-   IPv4-адрес. . . . . . . . . . . . : 192.168.5.174
-   Маска подсети . . . . . . . . . . : 255.255.255.0
-   Основной шлюз. . . . . . . . . : 192.168.5.2
-
-Адаптер Ethernet VirtualBox Host-Only Network:
-
-   DNS-суффикс подключения . . . . . :
-   Локальный IPv6-адрес канала . . . : fe80::6c41:64a3:5525:48b1%2
-   IPv4-адрес. . . . . . . . . . . . : 192.168.56.1
-   Маска подсети . . . . . . . . . . : 255.255.255.0
-   Основной шлюз. . . . . . . . . :
-
-Адаптер Ethernet Ethernet 7:
-
-   Состояние среды. . . . . . . . : Среда передачи недоступна.
-   DNS-суффикс подключения . . . . . :
-
 C:\Users\y.kozlov>ipconfig /all
 
 Настройка протокола IP для Windows
@@ -72,7 +47,7 @@ C:\Users\y.kozlov>ipconfig /all
                                        fec0:0:0:ffff::3%1
    NetBios через TCP/IP. . . . . . . . : Включен
 ```
-В Linux ранее была команда ifconfig, сейчас больше используется `ip`
+В Linux ранее была команда ifconfig, сейчас больше используется `ip`:
 ```
 us@ubuntu:~$ ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
