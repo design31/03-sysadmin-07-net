@@ -203,3 +203,65 @@ Unused:
 
 7. Как проверить ARP таблицу в Linux, Windows? Как очистить ARP кеш полностью? Как из ARP таблицы удалить только один нужный IP?
 
+Для Windows это команда `arp -a`:
+```
+C:\WINDOWS\system32>arp -a
+
+Интерфейс: 192.168.56.1 --- 0x2
+  адрес в Интернете      Физический адрес      Тип
+  192.168.56.255        ff-ff-ff-ff-ff-ff     статический
+  224.0.0.2             01-00-5e-00-00-02     статический
+  224.0.0.7             01-00-5e-00-00-07     статический
+  224.0.0.22            01-00-5e-00-00-16     статический
+  224.0.0.251           01-00-5e-00-00-fb     статический
+  224.0.0.252           01-00-5e-00-00-fc     статический
+  224.0.1.60            01-00-5e-00-01-3c     статический
+  224.0.1.75            01-00-5e-00-01-4b     статический
+  238.238.238.238       01-00-5e-6e-ee-ee     статический
+  239.192.152.143       01-00-5e-40-98-8f     статический
+  239.254.127.63        01-00-5e-7e-7f-3f     статический
+  239.255.255.250       01-00-5e-7f-ff-fa     статический
+  255.255.255.255       ff-ff-ff-ff-ff-ff     статический
+
+Интерфейс: 192.168.0.XXX --- 0xc
+  адрес в Интернете      Физический адрес      Тип
+  192.168.0.XXX          b4-2e-99-b7-6e-c4     динамический
+  192.168.0.255         ff-ff-ff-ff-ff-ff     статический
+  192.168.1.54          00-18-bc-00-79-12     динамический
+  192.168.1.55          00-18-bc-00-78-5d     динамический
+  192.168.1.56          00-18-bc-02-be-06     динамический
+  192.168.1.60          00-18-bc-03-7e-a4     динамический
+  ```
+  Чтобы очистить ARP-кэш, необходимо выполнить команду: `netsh interface ip delete arpcache`  
+  
+  В Linux есть утилита `arp`  входящая в пакет `net-tools`. 
+  Посмотреть все таблицы:
+  ```
+  us@ubuntu:~$ arp
+Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.5.254            ether   6c:3b:e5:07:8d:1a   C                     enp0s3
+2floor_log.XXX.local     ether   30:8d:99:ac:2e:f9   C                     enp0s3
+DC.XXX.local             ether   00:0c:29:83:5b:cb   C                     enp0s3
+192.168.5.13             ether   00:17:c8:8e:3b:80   C                     enp0s3
+192.168.5.197            ether   00:17:c8:9c:37:2e   C                     enp0s3
+```
+ Удалить один адрес из таблицы: 
+ ```
+ us@ubuntu:~$ sudo arp -d 192.168.5.254
+[sudo] password for us:
+us@ubuntu:~$ arp -i enp0s3
+Address                  HWtype  HWaddress           Flags Mask            Iface
+2floor_log.XXX.local     ether   30:8d:99:ac:2e:f9   C                     enp0s3
+DC.XXX.local           ether   00:0c:29:83:5b:cb   C                     enp0s3
+192.168.5.13             ether   00:17:c8:8e:3b:80   C                     enp0s3
+192.168.5.197            ether   00:17:c8:9c:37:2e   C                     enp0s3
+```
+Удалить все записи можно командой:
+```
+root@ubuntu:/home/us# ip link set arp off dev enp0s3; ip link set arp on dev enp0s3
+root@ubuntu:/home/us# arp
+Address                  HWtype  HWaddress           Flags Mask            Iface
+hostname.XXX.local       ether   f0:79:59:71:10:86   C                     enp0s3
+```
+
+---
